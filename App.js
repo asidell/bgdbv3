@@ -22,7 +22,6 @@ query {
 
 const Stack = createStackNavigator();
 
-
 export default class App extends React.Component {
   state = {
     title: '',
