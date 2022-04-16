@@ -32,7 +32,7 @@ export default class App extends React.Component {
   async componentDidMount() {
     try {
       const games = await API.graphql(graphqlOperation(ListGames));
-      console.log('games: ', games);
+      //console.log('games: ', games);
       this.setState({ games: games.data.listGames.items });
     } catch (err) {
       console.log('error: ', err);
