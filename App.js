@@ -32,7 +32,6 @@ export default class App extends React.Component {
   async componentDidMount() {
     try {
       const games = await API.graphql(graphqlOperation(ListGames));
-      //console.log('games: ', games);
       this.setState({ games: games.data.listGames.items });
     } catch (err) {
       console.log('error: ', err);
@@ -64,7 +63,6 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 20,
     flexDirection: 'row',
-    justifyContent: 'space-evenly'
   },
   logo: {
     width: 100,

@@ -6,19 +6,17 @@ Amplify.configure(config);
 import { API, graphqlOperation } from 'aws-amplify';
 import { SafeAreaView } from 'react-native';
 import { Component } from 'react/cjs/react.production.min';
+import { Linking } from 'react-native-web';
 
 
 const ListGames = `
 query {
   listGames {
     items {
-      id name image year description
+      id name image year description 
     }
   }
 }`;
-
-
-
 
 export default class GamePage extends Component {
     
@@ -28,6 +26,7 @@ export default class GamePage extends Component {
         image: '',
         year: '',
         description: '',
+        rules: '',
         games: [],
         selectedGame: []
       };
@@ -48,7 +47,7 @@ export default class GamePage extends Component {
         const game = this.state.selectedGame
         return(
             <View style={{paddingVertical: 30}}>
-                <ScrollView style={styles.gameContainer}>
+                <ScrollView style={styles.gameContainer} showsVerticalScrollIndicator ={false}>
                     <Image style={styles.logo} source={{uri: game.image}}/>
                     <Text style={styles.gameTitle} >{game.name}</Text>
                     <Text> {game.year}</Text>
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
     gameContainer: {
       paddingVertical: 20,
       paddingHorizontal: 20,
-      paddingBottom:100
+      paddingBottom:100,
     
     },
     logo: {

@@ -36,19 +36,20 @@ export default class HomePage extends Component {
       }
     render(){
         return(
-            <View>
+            <ScrollView>
+                {this.state.games.sort}
                 {this.state.games.map((game, index) => (
-                <ScrollView key ={index}>
+                <View key ={index} style={styles.container}>
                     <TouchableOpacity
                         onPress={() => this.props.navigation.navigate('GamePage',{passID: game.id})}>
                         <View style={styles.gameContainer}>
                             <Image style={styles.logo} source={{uri: game.image}}/>
-                            <Text style={styles.gameTitle} >{game.name}</Text>
+                            <Text style={styles.gameTitle}>{game.name}</Text>
                         </View>
                     </TouchableOpacity>
-                </ScrollView>
+                </View>
                 ))}
-            </View>
+            </ScrollView>
             
         )
     }
@@ -56,27 +57,30 @@ export default class HomePage extends Component {
 
 const styles = StyleSheet.create({
     container: {
-      backgroundColor: '#fff',
-      padding: 20,
+      padding: 5,
     },
     gameContainer: {
       height: 100,
       paddingVertical: 20,
       paddingHorizontal: 20,
       flexDirection: 'row',
-      justifyContent: 'space-evenly'
+      flex: 4
     },
     logo: {
       width: 100,
       height:100,
-      padding:10
+      padding:10,
+      flex:1
     },
     gameTitle: {
       includeFontPadding: true,
       textAlign: 'center',
       color: '#333436',
-      fontSize: 14,
-      padding: 40,
+      fontSize: 16,
+      padding: 10,
+      flex:3, 
+      flexWrap: 'wrap'
+      
     }
   
   });
