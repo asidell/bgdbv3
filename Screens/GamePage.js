@@ -16,16 +16,26 @@ query {
     }
   }
 }`;
+
+const GetGames = `
+query {
+  listGames {
+    items {
+      id name image year
+    }
+  }
+}`
 export default class GamePage extends Component {
     state = {
         title: '',
         image: '',
+        year: '',
         games: []
       };
 
     async componentDidMount() {
         try {
-          const games = await API.graphql(graphqlOperation(ListGames));
+          const games = await API.graphql(graphqlOperation(GetGames));
           console.log('games: ', games);
           this.setState({ games: games.data.listGames.items });
         } catch (err) {
@@ -40,10 +50,8 @@ export default class GamePage extends Component {
                 <View key ={index} style={styles.gameContainer}>
                     <Image style={styles.logo} source={{uri: game.image}}/>
                     <Text style={styles.gameTitle} >{game.name}</Text>
-            
                 </View>
                 ))}
-                <Button onPress={() => this.props.navigation.navigate('HomePage')} title="Home"/>
             </View>
             
         )

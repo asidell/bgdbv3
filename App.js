@@ -26,6 +26,7 @@ export default class App extends React.Component {
   state = {
     title: '',
     image: '',
+    id: '',
     games: []
   };
   async componentDidMount() {
