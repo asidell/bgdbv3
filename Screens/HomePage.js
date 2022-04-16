@@ -6,12 +6,15 @@ Amplify.configure(config);
 import { API, graphqlOperation } from 'aws-amplify';
 import { SafeAreaView } from 'react-native';
 import { Component } from 'react/cjs/react.production.min';
+import { useNavigation } from '@react-navigation/native';
 
 export default class HomePage extends Component {
+
     render(){
         return(
             <View>
                 <Text>This is the Home Page</Text>
+                <Button onPress={() => this.props.navigation.navigate('GamePage')} title="Game"/>
             </View>
             
         )

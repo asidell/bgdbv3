@@ -5,9 +5,10 @@ import config from './src/aws-exports';
 Amplify.configure(config);
 import { API, graphqlOperation } from 'aws-amplify';
 import { SafeAreaView } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from '@react-navigation/stack';
 import HomePage from './Screens/HomePage';
 import GamePage from './Screens/GamePage';
+import { NavigationContainer } from '@react-navigation/native';
 
 
 const ListGames = `
@@ -19,11 +20,7 @@ query {
   }
 }`;
 
-const AppNavigator = createStackNavigator({
-  HomeScreen: {screen:HomePage},
-  GameScreen: {screen:GamePage},
-  
-});
+const Stack = createStackNavigator();
 
 
 export default class App extends React.Component {
@@ -46,10 +43,16 @@ export default class App extends React.Component {
   };
   render() {
     return (
-      <AppNavigator/>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="HomePage" component={HomePage}/>
+          <Stack.Screen name="GamePage" component={GamePage}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+      
       
     );
-  }
+  } 
 }
 const styles = StyleSheet.create({
   container: {

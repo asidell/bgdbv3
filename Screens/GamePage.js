@@ -8,14 +8,14 @@ import { SafeAreaView } from 'react-native';
 import { Component } from 'react/cjs/react.production.min';
 
 export default class GamePage extends Component {
+
     render(){
         return(
             <View>
-                <Text> This is the Game Page</Text>
+                <Text>This is the Game Page</Text>
                 <Button onPress={() => this.props.navigation.navigate('HomePage')} title="Home"/>
             </View>
             
-
         )
     }
 };
