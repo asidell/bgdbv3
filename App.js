@@ -5,6 +5,10 @@ import config from './src/aws-exports';
 Amplify.configure(config);
 import { API, graphqlOperation } from 'aws-amplify';
 import { SafeAreaView } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomePage from './Screens/HomePage';
+import GamePage from './Screens/GamePage';
+import { NavigationContainer } from '@react-navigation/native';
 
 
 const ListGames = `
@@ -16,16 +20,18 @@ query {
   }
 }`;
 
+const Stack = createStackNavigator();
+
 export default class App extends React.Component {
   state = {
     title: '',
     image: '',
+    id: '',
     games: []
   };
   async componentDidMount() {
     try {
       const games = await API.graphql(graphqlOperation(ListGames));
-      console.log('games: ', games);
       this.setState({ games: games.data.listGames.items });
     } catch (err) {
       console.log('error: ', err);
@@ -36,17 +42,16 @@ export default class App extends React.Component {
   };
   render() {
     return (
-      <View style={styles.container}>
-        {this.state.games.map((game, index) => (
-          <View key ={index} style={styles.gameContainer}>
-            <Image style={styles.logo} source={{uri: game.image}}/>
-            <Text style={styles.gameTitle} >{game.name}</Text>
-            
-          </View>
-        ))}
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="HomePage" component={HomePage}/>
+          <Stack.Screen name="GamePage" component={GamePage}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+      
+      
     );
-  }
+  } 
 }
 const styles = StyleSheet.create({
   container: {
@@ -58,7 +63,6 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 20,
     flexDirection: 'row',
-    justifyContent: 'space-evenly'
   },
   logo: {
     width: 100,
